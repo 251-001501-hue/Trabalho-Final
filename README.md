@@ -33,8 +33,8 @@ No menu principal tem:
 ```
 Cada opção abre um submenu também numérico. Nas quatro estruturas tem criar, consultar/listar, atualizar e remover:
 - **Lista**: insiro em um índice escolhido ou no fim; consulto por PID ou índice; atualizo e removo da mesma forma.
-- **Fila**: enfileiro no fim, vejo quem está próximo da CPU, atualizo o processo **sem mudar a posição dele** e desenfileiro o primeiro.
-- **Pilha**: empilho no topo, vejo o topo, atualizo **só o topo** e desempilho.
+- **Fila**: enfileiro no fim, vejo quem está próximo da CPU, atualizo o processo sem mudar a posição dele e desenfileiro o primeiro.
+- **Pilha**: empilho no topo, vejo o topo, atualizo só o topo e desempilho.
 - **Árvore**: crio diretório ou arquivo, listo a árvore, consulto um caminho, renomeio e removo (com confirmação se o diretório tiver coisas dentro).
 
 Um detalhe que eu achei importante:criar diretório ou arquivo não salva sozinho. O salvamento é sempre pela opção `[5]`, como o enunciado pediu.
