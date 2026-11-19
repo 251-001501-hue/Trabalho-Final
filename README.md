@@ -97,7 +97,7 @@ A `list` serve bem porque:
 - o PID funciona como chave e eu confiro se ele já existe antes de inserir ou renomear.
 
 ### Fila — escalonamento da CPU
-Aqui escolhi `collections.deque` em vez de `list`. A regra da fila de prontos é FIFO: quem chegou primeiro recebe a CPU primeiro. As duas operações que eu mais uso são `append()` no fim e `popleft()` no início, e as duas são `O(1)` no `deque`.
+Aqui escolhi `collections.deque` em vez de `list`. A regra da fila de prontos é FIFO: quem chegou primeiro recebe a CPU primeiro. As duas operações que eu mais usei são `append()` no fim e `popleft()` no início, e as duas são `O(1)` no `deque`.
 Se eu usasse `list`, todo `pop(0)` teria que deslocar os outros elementos, custando `O(n)`. Em um simulador de escalonamento isso acontece o tempo todo, então seria um gargalo besta. Quando atualizo um processo, altero os campos no mesmo índice para não "furar a fila".
 
 ### Pilha — chamadas e interrupções
