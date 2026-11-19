@@ -1,7 +1,4 @@
 # Simulador de Sistema Operacional
-Projeto final da disciplina de **Estruturas de Dados**. A ideia foi montar o núcleo lógico de um pequeno sistema operacional usando as quatro estruturas que vimos na aula: **lista, pilha, fila e árvore**. Tudo em Python puro, sem biblioteca de terceiros, e com os dados salvos em um arquivo texto.
-
-O programa **sempre começa vazio**. Se já existir um `dados_sistema.txt`, eu mesmo escolho a opção **Carregar dados** quando quiser recuperar o que tinha salvo.
 
 ## Como executar
 Precisa ter Python 3.8 ou mais novo. Abra a pasta onde estão `main.py` e `README.md` e rode:
