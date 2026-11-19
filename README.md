@@ -23,8 +23,8 @@ python main.py
 A interação é só pelo terminal, com menu numérico:digita o número e dá `Enter`. Em campo de texto, deixar em branco e dar `Enter` mantém o valor anterior quando faz sentido.
 **Os avisos do programa têm acento. Se aparecerem caracteres estranhos no `cmd` do Windows, roda `chcp 65001` antes de iniciar.**
 
-## O que tem no menu
-No menu principal eu tenho:
+## Menu
+No menu principal tem:
 ```text
 [1] Lista  - processos ativos em segundo plano
 [2] Fila   - escalonamento da CPU
@@ -72,7 +72,7 @@ ARVORE|Clinica Geral|Cardiologia|Arritmia
 ARVORE|Clinica Geral|Ortopedia|Fratura
 ```
 
-Na árvore eu segui exatamente o formato do exemplo: a linha só com o caminho, sem `DIR` e sem `ARQ`. O último pedaço é o arquivo; os anteriores são os diretórios. Por isso `Clinica Geral` e `Cardiologia` não aparecem em linhas próprias, elas são inferidas pelo prefixo.
+Na árvore eu segui exatamente o formato do exemplo. O último pedaço é o arquivo; os anteriores são os diretórios. Por isso `Clinica Geral` e `Cardiologia` não aparecem em linhas próprias, elas são inferidas pelo prefixo.
 Se um diretório ficar vazio, ele é gravado com um `|` no final, por exemplo:
 ```text
 ARVORE|Clinica Geral|Vazia|
