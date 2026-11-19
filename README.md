@@ -134,4 +134,3 @@ Antes de fechar eu conferi:
 - FIFO na fila e LIFO na pilha;
 - nome com `|` sendo gravado e restaurado certo;
 - diretório vazio sobrevivendo ao save/load;
-- arquivo antigo com `ARQ`/`DIR` ainda carregando.
