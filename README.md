@@ -229,36 +229,3 @@ recursão. Assim, o programa consegue percorrer os diretórios e seus
 conteúdos até chegar aos arquivos. As operações de criação, renomeação e
 remoção atuam somente no trecho da árvore correspondente ao caminho
 informado.
-
-## Cuidados durante o desenvolvimento
-
-Durante a implementação, procurei garantir alguns comportamentos para
-evitar problemas no uso do programa:
-
--   O sistema começa vazio e não carrega informações do arquivo
-    automaticamente.
--   As opções de salvar e carregar são separadas no menu.
--   Na fila, a remoção acontece pelo início; na pilha, acontece pelo
-    topo.
--   Na lista, é possível localizar um processo pelo índice ou pelo PID.
--   O programa não permite cadastrar PID ou ID que já estejam em uso.
--   Se uma linha do arquivo TXT estiver inválida, ela é ignorada e o
-    programa mostra um aviso, em vez de encerrar a execução.
--   Todo o código está no arquivo `main.py`, organizado em funções e com
-    comentários nos trechos principais.
-
-## Testes realizados
-
-Antes de finalizar, fiz alguns testes para conferir se as principais
-partes estavam funcionando:
-
--   Verifiquei a sintaxe do código com `python -m py_compile main.py`.
--   Testei o salvamento, fechei o programa e carreguei os dados
-    novamente.
--   Conferi se os registros da árvore eram gravados no formato
-    apresentado no enunciado.
--   Testei a ordem FIFO da fila e LIFO da pilha.
--   Verifiquei se um nome contendo `|` era salvo e recuperado
-    corretamente.
--   Testei também se um diretório vazio continuava existindo depois de
-    salvar e carregar os dados.
