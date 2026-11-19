@@ -1,28 +1,45 @@
 # Simulador de Sistema Operacional
 
 ## Como executar
-Precisa ter Python 3.8 ou mais novo. Abra a pasta onde estão `main.py` e `README.md` e rode:
-```bash
+
+Para rodar o projeto, é necessário ter o Python 3.8 ou uma versão mais
+recente instalado no computador.
+
+Abra o terminal na pasta em que estão os arquivos `main.py` e
+`README.md` e execute:
+
+``` bash
 python main.py
 ```
 
-No Windows também dá para usar:
-```bash
+Se estiver usando Windows, também pode iniciar com:
+
+``` bash
 py main.py
 ```
 
-Se você estiver na pasta pai, antes entra em `simulador_so`:
-```bash
+Caso o terminal esteja aberto na pasta anterior, entre primeiro na pasta
+`simulador_so`:
+
+``` bash
 cd simulador_so
 python main.py
 ```
 
-A interação é só pelo terminal, com menu numérico:digita o número e dá `Enter`. Em campo de texto, deixar em branco e dar `Enter` mantém o valor anterior quando faz sentido.
-**Os avisos do programa têm acento. Se aparecerem caracteres estranhos no `cmd` do Windows, roda `chcp 65001` antes de iniciar.**
+O programa funciona pelo próprio terminal. A navegação é feita por menus
+numéricos: basta digitar a opção desejada e apertar `Enter`. Em alguns
+campos de texto, se deixar vazio e apertar `Enter`, o valor anterior é
+mantido, quando isso se aplica.
 
-## Menu
-No menu principal tem:
-```text
+Os avisos do programa utilizam acentos. Se eles aparecerem com
+caracteres estranhos no CMD do Windows, execute `chcp 65001` antes de
+iniciar o programa.
+
+## Menu principal
+
+Ao iniciar, o programa apresenta estas opções:
+
+``` text
 [1] Lista  - processos ativos em segundo plano
 [2] Fila   - escalonamento da CPU
 [3] Pilha  - chamadas e interrupções
@@ -31,34 +48,62 @@ No menu principal tem:
 [6] Carregar dados
 [7] Sair
 ```
-Cada opção abre um submenu também numérico. Nas quatro estruturas tem criar, consultar/listar, atualizar e remover:
-- **Lista**: insiro em um índice escolhido ou no fim; consulto por PID ou índice; atualizo e removo da mesma forma.
-- **Fila**: enfileiro no fim, vejo quem está próximo da CPU, atualizo o processo sem mudar a posição dele e desenfileiro o primeiro.
-- **Pilha**: empilho no topo, vejo o topo, atualizo só o topo e desempilho.
-- **Árvore**: crio diretório ou arquivo, listo a árvore, consulto um caminho, renomeio e removo (com confirmação se o diretório tiver coisas dentro).
 
-Um detalhe que eu achei importante:criar diretório ou arquivo não salva sozinho. O salvamento é sempre pela opção `[5]`, como o enunciado pediu.
+Cada opção abre um submenu com outras operações. Nas quatro estruturas
+de dados, é possível criar, consultar, atualizar e remover informações.
 
-## Arquivos da entrega
-O repositório tem só:
-```text
+-   **Lista:** permite adicionar um processo em uma posição escolhida ou
+    no final. Também é possível consultar pelo PID ou pelo índice, além
+    de atualizar e remover registros.
+-   **Fila:** os processos entram no final da fila. O programa mostra
+    qual será o próximo a utilizar a CPU, permite atualizar os dados de
+    um processo sem mudar sua posição e remove sempre o primeiro da
+    fila.
+-   **Pilha:** os novos itens são adicionados no topo. É possível
+    consultar e atualizar o item do topo ou removê-lo.
+-   **Árvore:** permite criar diretórios e arquivos, visualizar a
+    estrutura, consultar um caminho, renomear itens e remover arquivos
+    ou diretórios. Quando um diretório possui conteúdo, o programa pede
+    uma confirmação antes de removê-lo.
+
+Uma observação importante é que criar um diretório ou arquivo não salva
+os dados automaticamente. Para gravar as alterações, é necessário voltar
+ao menu principal e escolher a opção `[5] Salvar dados`. Fiz dessa forma
+porque o salvamento é uma operação separada no enunciado.
+
+## Arquivos do projeto
+
+A entrega contém dois arquivos:
+
+``` text
 main.py
 README.md
 ```
 
-O `dados_sistema.txt` não vai junto. Ele aparece na mesma pasta do `main.py` na primeira vez que eu escolho "Salvar dados", até lá, o programa roda vazio.
+O arquivo `dados_sistema.txt` não precisa estar presente inicialmente.
+Ele é criado na mesma pasta do `main.py` quando a opção de salvar os
+dados é utilizada pela primeira vez. Por isso, o programa pode ser
+iniciado normalmente mesmo sem esse arquivo.
 
 ## Como os dados são salvos
-Usei um único arquivo `.txt`, sem banco, sem JSON, sem CSV e sem `pickle`. Cada linha começa com o identificador da estrutura e os campos vão separados por `|`:
-```text
+
+Para salvar as informações, utilizei um único arquivo de texto (`.txt`).
+Não usei banco de dados, JSON, CSV ou `pickle`, pois a proposta era
+trabalhar com o formato solicitado no enunciado.
+
+Cada linha começa com o nome da estrutura de dados. Depois, os valores
+são separados pelo caractere `|`. O formato utilizado é este:
+
+``` text
 LISTA|pid|nome|recurso|estado
 FILA|pid|nome|prioridade
 PILHA|id|rotulo|descricao
 ARVORE|segmento1|segmento2|...|arquivo
 ```
 
-Exemplo parecido com o que pediu o enunciado:
-```text
+Um exemplo de como essas informações podem aparecer no arquivo:
+
+``` text
 LISTA|101|Carlos Silva|Leito 04|Estavel
 LISTA|102|Mariana Souza|Leito 09|Observacao
 FILA|205|Roberto Alves|Prioridade Alta
@@ -69,68 +114,151 @@ ARVORE|Clinica Geral|Cardiologia|Arritmia
 ARVORE|Clinica Geral|Ortopedia|Fratura
 ```
 
-Na árvore eu segui exatamente o formato do exemplo. O último pedaço é o arquivo; os anteriores são os diretórios. Por isso `Clinica Geral` e `Cardiologia` não aparecem em linhas próprias, elas são inferidas pelo prefixo.
-Se um diretório ficar vazio, ele é gravado com um `|` no final, por exemplo:
-```text
+Na estrutura de árvore, segui o padrão do exemplo do enunciado. O último
+elemento representa o arquivo, enquanto os elementos anteriores
+representam os diretórios. Assim, diretórios como `Clinica Geral` e
+`Cardiologia` são identificados pelo caminho, não precisando aparecer em
+linhas separadas.
+
+Quando um diretório está vazio, ele também é registrado. Nesse caso, a
+linha termina com `|`, como no exemplo:
+
+``` text
 ARVORE|Clinica Geral|Vazia|
 ```
 
-Para conseguir a linha `ARVORE|Clinica Geral|Cardiologia|Arritmia`, o caminho tem que ser digitado completo no menu:
-```text
+Para gerar uma linha como `ARVORE|Clinica Geral|Cardiologia|Arritmia`, é
+necessário criar os diretórios seguindo o caminho completo pelo menu:
+
+``` text
 [4] Árvore
   [1] Criar diretório → /Clinica Geral
   [1] Criar diretório → /Clinica Geral/Cardiologia
   [2] Criar arquivo   → /Clinica Geral/Cardiologia/Arritmia
 ```
 
-Depois volto ao menu principal e escolho `[5] Salvar dados`. Se eu tivesse criado `Cardiologia` direto na raiz, a linha sairia separada, só com `ARVORE|Cardiologia|Arritmia`.
-Também fiz aque se no caso de alguém digitar `|`, `\` ou quebra de linha dentro de um nome. Antes de gravar eu escapo esses caracteres (`\|`, `\\`, `\n`) e na leitura desfaz o escape. Assim um arquivo chamado `a|b.txt` volta certinho.
+Depois disso, basta voltar ao menu principal e selecionar
+`[5] Salvar dados`. Se o diretório `Cardiologia` fosse criado
+diretamente na raiz, o registro seria diferente, ficando assim:
+`ARVORE|Cardiologia|Arritmia`.
 
-## Por que eu escolhi cada estrutura
-### Lista — processos ativos em segundo plano
-Usei a `list` nativa. Um processo que fica rodando em segundo plano, tipo `sshd` ou `cron`, não tem uma regra rígida de entrada e saída: ele pode ser consultado, alterado ou encerrado a qualquer momento, inclusive pela posição que ocupa na tabela.
+Também tratei alguns caracteres que poderiam atrapalhar a gravação do
+arquivo. Se o usuário digitar `|`, `\` ou uma quebra de linha em um
+nome, esses caracteres são convertidos antes de salvar (`\|`, `\\` e
+`\n`). Na hora de carregar os dados, o programa faz o processo inverso.
+Dessa forma, um nome como `a|b.txt` é recuperado corretamente.
 
-A `list` serve bem porque:
-- acesso por índice é direto, `O(1)`;
-- `insert(posicao, item)` e `pop(indice)` resolvem a manipulação por índice;
-- a ordem da tabela fica estável para mostrar no terminal;
-- o PID funciona como chave e eu confiro se ele já existe antes de inserir ou renomear.
+## Por que utilizei cada estrutura de dados
 
-### Fila — escalonamento da CPU
-Aqui escolhi `collections.deque` em vez de `list`. A regra da fila de prontos é FIFO: quem chegou primeiro recebe a CPU primeiro. As duas operações que eu mais usei são `append()` no fim e `popleft()` no início, e as duas são `O(1)` no `deque`.
-Se eu usasse `list`, todo `pop(0)` teria que deslocar os outros elementos, custando `O(n)`. Em um simulador de escalonamento isso acontece o tempo todo, então seria um gargalo besta. Quando atualizo um processo, altero os campos no mesmo índice para não "furar a fila".
+### Lista --- processos ativos em segundo plano
 
-### Pilha — chamadas e interrupções
-A pilha também é uma `list`, mas eu só uso `append()` e `pop()`, sempre no topo. Isso é `O(1)` e reproduz o que a CPU faz: quando uma rotina chama outra, ou quando chega uma interrupção, o contexto novo vai por cima; na volta, o sistema retorna primeiro para o topo.
-Por isso mesmo a atualização eu limitei ao topo. Mexer em um elemento lá de baixo quebraria a lógica LIFO. Se fosse fila, o retorno sairia na ordem errada.
+Para representar os processos ativos em segundo plano, utilizei a
+estrutura `list` do próprio Python. Escolhi essa estrutura porque esses
+processos podem ser consultados, alterados ou removidos a qualquer
+momento, sem precisar seguir uma ordem fixa de entrada e saída.
 
-### Árvore — sistema de arquivos
-O Python não tem um tipo `Tree` pronto, então montei a hierarquia com dicionários aninhados, sem criar classe de nó nem ponteiro na mão:
-```python
-# diretório
+A lista também facilita o acesso aos elementos por índice. Nesse caso, o
+acesso é `O(1)`. Para inserir ou remover um item em uma posição
+específica, utilizei operações como `insert()` e `pop()`.
+
+Outro ponto é que a lista mantém a ordem dos processos, o que facilita
+mostrar as informações no terminal. Cada processo possui um PID, que
+funciona como identificador. Antes de cadastrar ou alterar um processo,
+o programa verifica se esse PID já está sendo utilizado, evitando
+duplicidade.
+
+### Fila --- escalonamento da CPU
+
+Para a fila de processos, utilizei `collections.deque`. Essa escolha tem
+relação com o funcionamento do escalonamento FIFO (*First In, First
+Out*), em que o primeiro processo que entra é também o primeiro a sair.
+
+Com o `deque`, consigo adicionar um processo no final usando `append()`
+e remover o primeiro usando `popleft()`. Essas duas operações têm custo
+`O(1)`.
+
+Se tivesse utilizado uma lista comum, a remoção do primeiro elemento com
+`pop(0)` exigiria deslocar os outros elementos, tendo custo `O(n)`. Como
+essa operação faz parte do funcionamento principal da fila, o `deque`
+acaba sendo mais adequado.
+
+Também tomei cuidado para que a atualização de um processo não altere
+sua posição. Assim, mesmo quando os dados são modificados, a ordem de
+atendimento da fila continua a mesma.
+
+### Pilha --- chamadas e interrupções
+
+Na pilha, também utilizei uma `list` do Python. Nesse caso, trabalho
+apenas com o topo da estrutura, utilizando `append()` para adicionar um
+item e `pop()` para removê-lo. As duas operações possuem custo `O(1)`.
+
+A pilha segue a lógica LIFO (*Last In, First Out*), ou seja, o último
+elemento que entra é o primeiro a sair. Isso representa bem situações
+como chamadas de funções e interrupções, nas quais o contexto mais
+recente precisa ser tratado primeiro.
+
+Por esse motivo, a atualização também foi limitada ao elemento que está
+no topo. Alterar um item que está no meio ou no final da pilha não
+seguiria a lógica dessa estrutura.
+
+### Árvore --- sistema de arquivos
+
+Para representar o sistema de arquivos, utilizei dicionários aninhados,
+já que o Python não possui uma estrutura `Tree` pronta para esse caso.
+Com essa organização, cada diretório pode guardar outros diretórios ou
+arquivos.
+
+A representação básica ficou assim:
+
+``` python
+# Diretório
 {"tipo": "dir", "filhos": {"home": ..., "etc": ...}}
 
-# arquivo
+# Arquivo
 {"tipo": "arquivo"}
 ```
 
-A árvore faz sentido aqui porque diretório e arquivo são naturalmente pai e filho. Um caminho como `/home/aluno/notas.txt` é percorrido pedaço por pedaço, e o nome do filho serve de chave do dicionário — então não dá para ter dois itens com o mesmo nome dentro do mesmo diretório.
-A listagem completa e a gravação no TXT são feitas por recursão, que é o jeito mais direto de percorrer uma hierarquia. Criar, renomear ou apagar um nó mexe só no ramo correspondente.
+Escolhi uma árvore porque ela representa bem a relação entre diretórios
+e arquivos. Um caminho como `/home/aluno/notas.txt`, por exemplo, é
+percorrido parte por parte até chegar ao arquivo desejado. O nome de
+cada item funciona como chave no dicionário, então não é possível
+cadastrar dois itens com o mesmo nome dentro do mesmo diretório.
 
-## Cuidados que eu tive
-- O sistema começa vazio; nada é lido do disco automaticamente.
-- Salvar e carregar são opções separadas no menu.
-- Fila só sai pelo início e pilha só sai pelo topo.
-- Lista aceita tanto índice quanto PID.
-- PID e ID duplicados são barrados.
-- Linha inválida no TXT é ignorada com aviso, em vez de quebrar o programa.
-- Todo o código ficou em `main.py`, separado em funções e com comentários curtos nos pontos mais importantes.
+Para mostrar toda a estrutura e salvar os dados no arquivo TXT, utilizei
+recursão. Assim, o programa consegue percorrer os diretórios e seus
+conteúdos até chegar aos arquivos. As operações de criação, renomeação e
+remoção atuam somente no trecho da árvore correspondente ao caminho
+informado.
 
-## Testes que rodei
-Antes de fechar eu conferi:
-- `python -m py_compile main.py`;
-- salvar, fechar e carregar de novo;
-- linhas da árvore saindo exatamente como no exemplo do enunciado;
-- FIFO na fila e LIFO na pilha;
-- nome com `|` sendo gravado e restaurado certo;
-- diretório vazio sobrevivendo ao save/load;
+## Cuidados durante o desenvolvimento
+
+Durante a implementação, procurei garantir alguns comportamentos para
+evitar problemas no uso do programa:
+
+-   O sistema começa vazio e não carrega informações do arquivo
+    automaticamente.
+-   As opções de salvar e carregar são separadas no menu.
+-   Na fila, a remoção acontece pelo início; na pilha, acontece pelo
+    topo.
+-   Na lista, é possível localizar um processo pelo índice ou pelo PID.
+-   O programa não permite cadastrar PID ou ID que já estejam em uso.
+-   Se uma linha do arquivo TXT estiver inválida, ela é ignorada e o
+    programa mostra um aviso, em vez de encerrar a execução.
+-   Todo o código está no arquivo `main.py`, organizado em funções e com
+    comentários nos trechos principais.
+
+## Testes realizados
+
+Antes de finalizar, fiz alguns testes para conferir se as principais
+partes estavam funcionando:
+
+-   Verifiquei a sintaxe do código com `python -m py_compile main.py`.
+-   Testei o salvamento, fechei o programa e carreguei os dados
+    novamente.
+-   Conferi se os registros da árvore eram gravados no formato
+    apresentado no enunciado.
+-   Testei a ordem FIFO da fila e LIFO da pilha.
+-   Verifiquei se um nome contendo `|` era salvo e recuperado
+    corretamente.
+-   Testei também se um diretório vazio continuava existindo depois de
+    salvar e carregar os dados.
