@@ -84,9 +84,7 @@ Para conseguir a linha `ARVORE|Clinica Geral|Cardiologia|Arritmia`, o caminho te
 ```
 
 Depois volto ao menu principal e escolho `[5] Salvar dados`. Se eu tivesse criado `Cardiologia` direto na raiz, a linha sairia separada, só com `ARVORE|Cardiologia|Arritmia`.
-Também tratei o caso de alguém digitar `|`, `\` ou quebra de linha dentro de um nome. Antes de gravar eu escapo esses caracteres (`\|`, `\\`, `\n`) e na leitura desfaz o escape. Assim um arquivo chamado `a|b.txt` volta certinho.
-
-"Se sobrar um TXT antigo com `ARVORE|ARQ|...` ou `ARVORE|DIR|...`, o carregador ainda reconhece. Na próxima gravação ele já sai no formato limpo."
+Também fiz aque se no caso de alguém digitar `|`, `\` ou quebra de linha dentro de um nome. Antes de gravar eu escapo esses caracteres (`\|`, `\\`, `\n`) e na leitura desfaz o escape. Assim um arquivo chamado `a|b.txt` volta certinho.
 
 ## Por que eu escolhi cada estrutura
 ### Lista — processos ativos em segundo plano
